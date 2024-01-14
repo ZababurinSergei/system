@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/index.module.css", "src/Panel/index.module.css"],
+  "sourcesContent": [":host{\n    margin: 0;\n    padding: 0;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    flex-grow: 1;\n    overflow: hidden;\n}\n\n#root {\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    flex-grow: 1;\n    height: 80vh;\n}\n\n.root {\n    position: relative;\n    display: grid;\n    grid-template-columns: 1fr;\n    grid-template-rows: 1fr;\n    height: 100vh;\n}\n\n@media only all and (max-width: 767px) {\n\n}\n\n@media all and (min-width: 768px) and (max-width: 1368px) {\n\n}\n\n@media all and (min-width: 1025px) { }\n", ".panel {\n    background: rgba(178, 125, 89, 0.53);\n    background-image: url(\"@src/this/img/forest/index.jpg\");\n}"],
+  "mappings": "AAAA,sEAAA,gDAUA,iHAQA,wHClBA",
+  "names": []
+}
