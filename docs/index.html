@@ -1502,58 +1502,90 @@
         genesis: {
             name: 'system',
             pathname: '/services/system/src',
-            children: ['mss', 'rules', 'system'],
+            children: ['mss', 'rules', 'system', 'osc'],
             mapping: ['name', 'body']
         }
     };
 
-    changeService = Object.assign(changeService, {
-        [changeService.genesis.children[0]]: {
-          [changeService.genesis.name]: {
+    let services = {}
+
+    for(let i = 0; i < changeService.genesis.children.length; ++i) {
+      let property = {
+        system: {},
+        body: {}
+      }
+
+      switch (changeService.genesis.children[i]) {
+        case 'mss':
+          property.genesis = {
             header: true,
             relation: true,
             body: true,
             property: false,
             footer: true
-          },
-          [changeService.genesis.mapping[0]]: changeService.genesis.children[0],
-          [changeService.genesis.mapping[1]]: {
-                filter: {
-                    top: true
-                }
           }
-        },
-        [changeService.genesis.children[1]]: {
-            [changeService.genesis.mapping[0]]: changeService.genesis.children[1],
-            [changeService.genesis.mapping[1]]: {
-                filter: {
-                    top: false
-                }
-            },
-            [changeService.genesis.name]: {
-                header: false,
-                relation: true,
-                body: true,
-                property: false,
-                footer: false
+
+          property.body = {
+            filter: {
+              top: true
             }
-        },
-      [changeService.genesis.children[2]]: {
-        [changeService.genesis.mapping[0]]: changeService.genesis.children[2],
-        [changeService.genesis.mapping[1]]: {
-          filter: {
-            top: true
           }
-        },
-        [changeService.genesis.name]: {
-          header: true,
-          relation: true,
-          body: true,
-          property: true,
-          footer: true
-        }
+          break
+        case 'rules':
+          property.genesis = {
+            header: false,
+            relation: true,
+            body: true,
+            property: false,
+            footer: false
+          }
+
+          property.body = {
+            filter: {
+              top: false
+            }
+          }
+          break
+        case 'osc':
+          property.genesis = {
+            header: true,
+            relation: true,
+            body: true,
+            property: true,
+            footer: true
+          }
+
+          property.body = {
+            filter: {
+              top: true
+            }
+          }
+          break
+        default:
+          property.genesis = {
+            header: true,
+            relation: true,
+            body: true,
+            property: true,
+            footer: true
+          }
+
+          property.body = {
+            filter: {
+              top: true
+            }
+          }
+          break
       }
-    });
+
+      services[changeService.genesis.children[i]] = {
+        [changeService.genesis.name]: property.genesis,
+        [changeService.genesis.mapping[0]]: changeService.genesis.children[i],
+        [changeService.genesis.mapping[1]]: property.body
+      }
+    }
+
+    changeService = Object.assign(changeService, services)
 
     Fonts(`/services/${changeService[`${dapp}`].name}/src`).catch(e => console.log(e));
 
