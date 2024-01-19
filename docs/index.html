@@ -29,6 +29,10 @@
           font-size: 1vmin;
       }
 
+      .invisible {
+        display: none;
+      }
+
       .auth {
           z-index: 20;
           position: absolute;
@@ -1062,7 +1066,7 @@
 <div class="service" slot="service"></div>
 <mss-filter
   id="bodyFilterTop"
-  style="display: none"
+  class="invisible"
   data-services-path="mss"
   data-css-shadow="mss"
   slot="body_before"
@@ -1089,8 +1093,7 @@
         class="container"
       >
         <fer-select
-                style="display: none"
-                class="mss-filter"
+                class="mss-filter invisible"
                 data-value=""
                 data-field="code"
                 data-services-path="mss"
@@ -1146,7 +1149,7 @@
           </template>
         </fer-select>
         <mss-input
-          style="display: none"
+          class="invisible"
           data-value=""
           data-field="code"
           data-services-path="mss"
@@ -1160,7 +1163,7 @@
         </mss-input>
 
         <mss-input
-          style="display: none"
+          class="invisible"
           data-value=""
           data-field="name"
           data-services-path="mss"
@@ -1174,8 +1177,7 @@
         </mss-input>
 
         <fer-select
-          style="display: none"
-          class="mss-filter"
+          class="mss-filter invisible"
           data-value="true"
           data-field="active"
           data-services-path="mss"
@@ -1326,8 +1328,7 @@
           </template>
         </mss-button>
         <button
-          style="display: none"
-          class="button_export"
+          class="button_export invisible"
         >
           Выгрузить
         </button>
@@ -1428,9 +1429,7 @@
                               </svg>
                             </div>
                           </div>
-                          <ul class="dropdown__list">
-
-                          </ul>
+                          <ul class="dropdown__list"></ul>
                         </div>
                       </template>
                     </fer-select>
@@ -1459,7 +1458,7 @@
 
 </fer-dialog>
 
-<div class="error" style="display: none">
+<div class="error invisible">
   Извините. Страница временно недоступна
 </div>
 </body>
@@ -1478,8 +1477,7 @@
       dapp = 'system'
     }
 
-    const { store } = await import(`/services/${dapp}/src/this/index.mjs`);
-    const { Fonts } = await import(`/services/${dapp}/src/fonts.mjs`);
+    const { store, Fonts } = await import(`/services/${dapp}/src/this/index.mjs`);
 
     if(location.hostname === 'localhost') {
       store.set('authorization', env().TOKEN)
@@ -1517,62 +1515,66 @@
 
       switch (changeService.genesis.children[i]) {
         case 'mss':
-          property.genesis = {
-            header: true,
-            relation: true,
-            body: true,
-            property: false,
-            footer: true
-          }
-
-          property.body = {
-            filter: {
-              top: true
+          property = {
+            genesis: {
+              header: true,
+              relation: true,
+              body: true,
+              property: false,
+              footer: true
+            },
+            body: {
+              filter: {
+                top: true
+              }
             }
           }
           break
         case 'rules':
-          property.genesis = {
-            header: false,
-            relation: true,
-            body: true,
-            property: false,
-            footer: false
-          }
-
-          property.body = {
-            filter: {
-              top: false
+          property = {
+            genesis: {
+              header: false,
+              relation: true,
+              body: true,
+              property: false,
+              footer: false
+            },
+            body: {
+              filter: {
+                top: false
+              }
             }
           }
           break
         case 'osc':
-          property.genesis = {
-            header: true,
-            relation: true,
-            body: true,
-            property: true,
-            footer: true
-          }
-
-          property.body = {
-            filter: {
-              top: true
+          property = {
+            genesis: {
+              header: true,
+              relation: true,
+              body: true,
+              property: true,
+              footer: true
+            },
+            body: {
+              filter: {
+                top: true
+              }
             }
           }
           break
         default:
-          property.genesis = {
-            header: true,
-            relation: true,
-            body: true,
-            property: true,
-            footer: true
-          }
-
-          property.body = {
-            filter: {
-              top: true
+          property = {
+            genesis: {
+              header: true,
+              relation: true,
+              body: true,
+              property: true,
+              footer: true
+            },
+            body: {
+              filter: {
+                top: true
+              }
             }
           }
           break
@@ -1593,7 +1595,7 @@
         pathname: `/services/${changeService[`${dapp}`].name}/src`
     });
 
-    store.set('isService', true)
+    // store.set('isService', true)
 
     const mssAuth = document.body.querySelector('mss-auth');
     const ferDialog = document.body.querySelector('fer-dialog');
@@ -1602,6 +1604,7 @@
     mssAuth.dataset.cssShadow = dapp;
     ferDialog.dataset.cssShadow = dapp;
     ferNotification.dataset.cssShadow = dapp;
+
     mssAuth.dataset.servicesPath = dapp;
     ferDialog.dataset.servicesPath = dapp;
     ferNotification.dataset.servicesPath = dapp;
@@ -1612,7 +1615,8 @@
 
     document.addEventListener('authContentLoaded', async (event) => {
       let user = store.get('authorization')
-      if(user ) {
+
+      if(user) {
         const { apiInit } = await import(`/api/swagger-initializer.mjs`);
         const init = await apiInit()
         const SwaggerClient = (await import(`/api/swagger-js/es/index.mjs`))['default'];
@@ -1624,7 +1628,7 @@
         console.log('API: ', window[swagger], 'ROUTER: ', routes)
 
         if (changeService[dapp].body.filter.top) {
-          document.body.querySelector('#bodyFilterTop').style.display = 'flex';
+          document.body.querySelector('#bodyFilterTop').classList.add('visible');
         }
 
         const mountPointSystem = {
@@ -1656,8 +1660,42 @@
           console.log('ERROR', e);
         });
       } else {
-        const auth = mssAuth.shadowRoot.querySelector('.container')
-        auth.style.opacity = 1
+        if(location.hostname === 'localhost') {
+          const { apiInit } = await import(`/api/swagger-initializer.mjs`);
+          const init = await apiInit()
+          const SwaggerClient = (await import(`/api/swagger-js/es/index.mjs`))['default'];
+          window[swagger] = await new SwaggerClient(`${window.location.origin}/api.yaml`)
+
+          const mountPointSystem = {
+            pathname: changeService.genesis.pathname,
+            pathTemplate: changeService.genesis.name,
+            mountPoint: document.body,
+            cssLight: dapp
+          };
+
+          const { system } = await import(`${changeService.genesis.pathname}/${changeService.genesis.name}.mjs`);
+
+          store.set('service', Object.assign({
+            [changeService.genesis.name]: {
+              header: true,
+              relation: true,
+              body: true,
+              property: false,
+              footer: true
+            }
+          }, {
+            [changeService.genesis.name]: changeService[`${dapp}`][`${changeService.genesis.name}`]
+          }));
+
+          store.set('current_service', changeService[`${dapp}`].name);
+          store.set('mount_self', mountPointSystem);
+
+          system(mountPointSystem).catch((e) => {
+            console.log('ERROR', e);
+          });
+        } else {
+          mssAuth.open = true
+        }
       }
     }, { once: true })
 
@@ -1684,6 +1722,7 @@
         const style = window.getComputedStyle(backButton)
         const display = style.getPropertyValue('display')
 
+        debugger
         if(display === 'none') {
           active.click()
         } else {

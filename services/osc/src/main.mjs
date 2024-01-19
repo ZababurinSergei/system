@@ -1,5 +1,4 @@
 import { loader, fromBase64, store } from './this/index.mjs'
-import { Models } from './models/index.mjs'
 import { tableVisual } from './component/fer-table/views/index.mjs';
 const models = await Models()
 
@@ -83,6 +82,7 @@ export const rules = (mount = {}) => {
     return new Promise(async (resolve, reject) => {
         window.scrollTo(0, 0)
 
+        debugger
         const currentService = store.get('current_service')
 
         // await loader(`/services/${currentService}/src/component/fer-codemirror/views/mjs/codemirror/codemirror_5_21_0.js`, 'CodeMirror')

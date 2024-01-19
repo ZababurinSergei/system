@@ -1,4 +1,4 @@
-import { store, size } from "../../../this/index.mjs";
+import { store } from "../../../this/index.mjs";
 // import MKB from '/services/mkb/build/index.mjs'
 // import lightCSS from '/services/mkb/build/index.css' assert {type: "css"}
 export default (self) => {
@@ -16,9 +16,6 @@ export default (self) => {
             grid__header.style.margin = '0'
             grid__header.style.gridTemplateRows = '0';
 
-
-            // grid__body.style.gridTemplateColumns = `var(--substrate-pr-width) 1fr 0` ;
-            // grid__body.style.gap = '0'
             const header = self.shadowRoot.querySelector('.grid__main')
             const grid__header_relation = self.shadowRoot.querySelector('.grid__header_relation')
             grid__header_relation.style.margin = '0'
