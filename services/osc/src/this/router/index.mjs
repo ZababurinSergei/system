@@ -37,7 +37,7 @@ export const router = async (self, props) => {
         }
     })
 
-    const params = window.location.pathname.replace(route.pathName, '')
+    const params = window.location.pathname.replace(route ? route.pathName: '/', '')
 
     if(route?.value) {
         props.value = route.value

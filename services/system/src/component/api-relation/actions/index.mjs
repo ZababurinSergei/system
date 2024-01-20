@@ -24,11 +24,12 @@ export default (self) => {
     const routes = await router(self, { location });
     store.set('section', routes.key);
 
+    console.log('dddddddddddddddddddddd', taskRelation)
+    if(taskRelation) {
+        for (let i = 0; i < taskRelation.events[self.tagName].length; ++i) {
+            const item = taskRelation.events[self.tagName][i];
 
-    for (let i = 0; i < taskRelation.events[self.tagName].length; ++i) {
-        const item = taskRelation.events[self.tagName][i];
-
-        menu.insertAdjacentHTML('beforeend', `
+            menu.insertAdjacentHTML('beforeend', `
                 <api-button
                     ${routes.value === item.value ? 'disabled' : '' }
                     data-role="aside"
@@ -49,14 +50,13 @@ export default (self) => {
                    
                 </api-button>
             `);
+        }
     }
+
 
     resolve({
         _doRender: (event) => {
             console.log('🏤 RENDER Relation 🏤', event);
         }
     });
-}
-)
-;
-}
+})}

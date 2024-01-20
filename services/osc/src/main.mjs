@@ -1,6 +1,4 @@
 import { loader, fromBase64, store } from './this/index.mjs'
-import { tableVisual } from './component/fer-table/views/index.mjs';
-const models = await Models()
 
 const ferDialog = document.body.querySelector('fer-dialog')
 const errorDialog = (message) => {

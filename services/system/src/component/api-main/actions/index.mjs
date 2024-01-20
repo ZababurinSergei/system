@@ -1,10 +1,12 @@
 import { store, loadHTML } from '../../../this/index.mjs'
+// import {service} from './service/index.mjs'
 
 const parser = new DOMParser()
 const template = document.createElement('template')
 const templateNext = document.createElement('template')
 
 const service = store.get('current_service')
+console.log(service)
 const templateService = parser.parseFromString(await loadHTML(`/template/${service}/index.html`), 'text/html').querySelector('template')
 const serviceRules = (await import(`/services/${service}/src/main.mjs`))['default']
 const imagesRules = templateService.content.querySelectorAll('img')
