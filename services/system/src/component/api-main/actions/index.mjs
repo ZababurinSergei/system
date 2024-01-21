@@ -8,7 +8,7 @@ const templateNext = document.createElement('template')
 const service = store.get('current_service')
 console.log(service)
 const templateService = parser.parseFromString(await loadHTML(`/template/${service}/index.html`), 'text/html').querySelector('template')
-const serviceRules = (await import(`/services/${service}/src/main.mjs`))['default']
+const initService = (await import(`/services/${service}/src/main.mjs`))['default']
 const imagesRules = templateService.content.querySelectorAll('img')
 
 const mountPointRules = {
@@ -30,7 +30,7 @@ export const actions = (self) => {
         const isService = store.get('isService')
 
         if(isService) {
-            serviceRules(mountPointRules).catch(e => console.error(e))
+            initService(mountPointRules).catch(e => console.error(e))
         } else {
             const service = document.querySelector('.service')
             service.style.display = 'none'
@@ -65,7 +65,7 @@ export const actions = (self) => {
                             if(rules !== null) {
                                 document.body.appendChild(rules)
                             } else {
-                                serviceRules(mountPointRules).then(api => {})
+                                initService(mountPointRules).then(api => {})
                             }
                             break
                         case "/service/welcomebook":

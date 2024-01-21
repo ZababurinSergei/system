@@ -11,9 +11,9 @@ export {
     multiaddr,
     protocols,
     resolvers,
-    loader
+    loader,
+    className
 } from './modules/index.mjs'
-
 export default {
     description: 'all modules for this',
     store: 'https://github.com/jaywcjlove/store.js',

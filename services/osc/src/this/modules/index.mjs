@@ -1,4 +1,4 @@
-export const classes = {
+export const className = {
     active: "active"
 }
 

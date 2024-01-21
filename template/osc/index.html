@@ -1,0 +1,83 @@
+<template id="osc">
+    <body>
+        <div class="container">
+            <slot name="header"></slot>
+            <slot name="scroll"></slot>
+            <slot name="menu"></slot>
+            <slot name="animation"></slot>
+            <div class="body">
+                <section class="container-off" data-id="0">
+                    <slot name="section-0"></slot>
+                </section>
+            </div>
+            <div class="layer-0">
+                <div
+                    data-id="0"
+                    data-section="0_0"
+                    class="section_0_0 inactive"
+                >
+                    <section class="container" data-id="0">
+                        <slot name="section_0_0"></slot>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <welcome-menu
+            data-id="menu"
+            data-services-path="osc"
+            data-css-shadow="osc"
+            slot="menu"
+        >
+            <template>
+                <div class="container">
+                    <div class="slider">
+                        <div class="square"></div>
+                    </div>
+                    <div class="body">
+                        <slot name="button-0"></slot>
+                        <slot name="button-1"></slot>
+                        <slot name="button-2"></slot>
+                        <slot name="button-3"></slot>
+                        <slot name="button-4"></slot>
+                        <slot name="button-5"></slot>
+                        <slot name="button-6"></slot>
+                        <slot name="button-7"></slot>
+                        <slot name="button-100"></slot>
+                    </div>
+                </div>
+            </template>
+        </welcome-menu>
+
+        <welcome-section
+            data-services-path="osc"
+            data-id="0"
+            data-to="_"
+            data-css-shadow="osc"
+            slot="section-0"
+        >
+            <template>
+                <div class="images"></div>
+                <div class="body">
+                    <div class="container">
+                        <div class="slot">
+                            <slot name="select"></slot>
+                        </div>
+                    </div>
+                </div>
+                <newkind-osc
+                    data-services-path="osc"
+                    data-id="0"
+                    data-to="_"
+                    slot="select"
+                    data-css-shadow="osc"
+                >
+                    <template>
+                        <div class="container">
+                           sdfsdf
+                        </div>
+                    </template>
+                </newkind-osc>
+            </template>
+        </welcome-section>
+    </body>
+</template>

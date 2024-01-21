@@ -1595,8 +1595,6 @@
         pathname: `/services/${changeService[`${dapp}`].name}/src`
     });
 
-    // store.set('isService', true)
-
     const mssAuth = document.body.querySelector('mss-auth');
     const ferDialog = document.body.querySelector('fer-dialog');
     const ferNotification = document.body.querySelector('fer-notification');
@@ -1617,6 +1615,7 @@
       let user = store.get('authorization')
 
       if(user) {
+        store.set('isService', true)
         const { apiInit } = await import(`/api/swagger-initializer.mjs`);
         const init = await apiInit()
         const SwaggerClient = (await import(`/api/swagger-js/es/index.mjs`))['default'];
@@ -1661,6 +1660,7 @@
         });
       } else {
         if(location.hostname === 'localhost') {
+          store.set('isService', true)
           const { apiInit } = await import(`/api/swagger-initializer.mjs`);
           const init = await apiInit()
           const SwaggerClient = (await import(`/api/swagger-js/es/index.mjs`))['default'];

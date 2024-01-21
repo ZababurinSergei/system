@@ -24,7 +24,6 @@ export default (self) => {
     const routes = await router(self, { location });
     store.set('section', routes.key);
 
-    console.log('dddddddddddddddddddddd', taskRelation)
     if(taskRelation) {
         for (let i = 0; i < taskRelation.events[self.tagName].length; ++i) {
             const item = taskRelation.events[self.tagName][i];

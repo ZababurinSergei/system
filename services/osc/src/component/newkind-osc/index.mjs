@@ -24,28 +24,7 @@ const INDEX = class extends HTMLElement {
             }
         }
     }
-    set open(val) {
-        if (val) {
-            this.setAttribute('open', '');
-            this.classList.add('skeleton')
-        } else {
-            this.removeAttribute('open');
-            this.classList.remove('skeleton')
-        }
-    }
-    get open() {
-        return this.hasAttribute('open');
-    }
-    set disabled(val) {
-        if (val) {
-            this.setAttribute('disabled', '');
-        } else {
-            this.removeAttribute('disabled');
-        }
-    }
-    get disabled() {
-        return this.hasAttribute('disabled');
-    }
+
     constructor() {
         super()
         if (!this.dataset.servicesPath) {

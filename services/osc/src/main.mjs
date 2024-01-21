@@ -80,7 +80,6 @@ export const rules = (mount = {}) => {
     return new Promise(async (resolve, reject) => {
         window.scrollTo(0, 0)
 
-        debugger
         const currentService = store.get('current_service')
 
         // await loader(`/services/${currentService}/src/component/fer-codemirror/views/mjs/codemirror/codemirror_5_21_0.js`, 'CodeMirror')
@@ -113,7 +112,7 @@ export const rules = (mount = {}) => {
             events,
         } = await import(`${pathname}/this/index.mjs`)
 
-        const components = ['mss-settings', 'mss-select', 'mss-input', 'mss-datapicker', 'mss-button','checklist-checkbox', 'mss-filter','fer-pagination', 'fer-select','fer-tree', 'fer-region', 'fer-form','fer-hash','fer-table', 'fer-link', 'fer-hash', 'fer-button', 'welcome-menu', 'welcome-section', 'welcome-header']
+        const components = ['newkind-osc', 'welcome-menu', 'welcome-section']
 
         for (let i = 0; i < components.length; ++i) {
             import(`${pathname}/component/${components[i]}/index.mjs`)
@@ -135,10 +134,7 @@ export const rules = (mount = {}) => {
         lightStyle.textContent = `@import "${pathname}/this/css/index.light.css";`
         mountPoint.appendChild(lightStyle)
 
-        // shadow.adoptedStyleSheets = [...shadow.adoptedStyleSheets, shadowCSS];
-        // document.adoptedStyleSheets = [...document.adoptedStyleSheets, lightCSS];
-
-        let shadowData = templateContent.querySelector('.welcome__book')
+        let shadowData = templateContent.querySelector('.container')
         shadow.appendChild(shadowData)
 
         if (template) {
