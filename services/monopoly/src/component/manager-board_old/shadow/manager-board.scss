@@ -1,0 +1,110 @@
+//@import "./docs/css/interface.scss";
+//@import "./docs/css/fonts.scss";
+//@import "./docs/css/media.scss";
+
+@mixin size(){
+  width: calc(100vw / 11.2);
+  height: calc(100vw * 0.101);
+}
+section#manager {
+  display: flex;
+  box-sizing: border-box;
+  padding: 5vw;
+  background-color: beige;
+  table#board{
+    //@include display(column, nowrap, space-evenly, center, stretch);
+    width: 100%;
+    border-collapse: collapse;
+    tbody{
+      //@include display(column, nowrap, space-evenly, center, stretch);
+      width: 100%;
+
+      tr{
+        //@include display(row, nowrap, space-between, center, stretch);
+        width: 100%;
+        padding: 0;
+        td {
+          //@include size();
+          //@include fonts(6);
+          font-family: arial, sans-serif;
+          border: 0.098vw solid black;
+          text-align: center;
+          padding: 0;
+        }
+        td.board-left, td.board-right, td.board-top, td.board-bottom{
+          //@include size();
+          padding: 0;
+          div#chance,div#marvin_garden,div#kentuky_avenue,div#waterWorks,div#ventnor, div#indiana,div#luxury_tax,div#atlantic-avenue,div#james,div#charles,div#city-tax,div#boardwalk,div#park-place,div#short-line,div#comminuty-chest,div#tennessee-avenue,div#new-york,
+          div#baltic_avenue, div#connecticut_avenue, div#electric_company, div#illinous_avenue,
+          div#mediterranean_avenue, div#new_york_avenue, div#north_carolina_avenue,
+          div#oriental_avenue, div#pacific_avenue,div#park_place,
+          ,div#pensilvania_avenue,div#pacific_avenue,div#st_james_place,div#tennessee_avenue
+        ,div#states_avenue, div#tennessee_avenue, div#ventnor_avenu,
+        div#vermont_avenue,div#virginia_avenue, div#short-line-2
+        , div#short-line-3
+        , div#short-line-4
+        {
+            display: flex;
+            width: 100%;
+            height: calc(100vw * 0.101);
+            img.chance, img.luxury_tax,img.atlantic-avenue,img.james,img.charles,img.city-tax,img.boardwalk,img.park-place,img.short-line,img.comminuty-chest,img.tennessee-avenue,img.new-york{
+              width: 100%;
+              height: calc(100vw * 0.101);
+            }
+            img.atlantic-avenue, img.luxury_tax ,img.baltic_avenue, img.indiana,
+            img.electric_company, img.ventnor, img.illinous_avenue{
+              width: 100%;
+              height: calc(100vw * 0.101);
+            }
+
+             img.new_york_avenue, img.oriental_avenue, img.tennessee_avenue, img.park_place {
+              width: 100%;
+              height: calc(100vw * 0.101);
+            }
+
+           img.pacific_avenue, img.st_james_place,img.marvin_garden,img.waterWorks {
+            width: 100%;
+            height: calc(100vw * 0.101);
+           }
+
+          img.mediterranean_avenue,img.north_carolina_avenue, img.tennessee_avenue, img.short-line-2
+           {
+            width: 100%;
+            height: calc(100vw * 0.101);
+          }
+
+            img.states_avenue, img.ventnor_avenu, img.connecticut_avenue, img.kentuky_avenue {
+              width: 100%;
+              height: calc(100vw * 0.101);
+            }
+          img.vermont_avenue, img.virginia_avenue, img.pensilvania_avenue {
+            width: 100%;
+            height: calc(100vw * 0.101);
+           }
+
+          img.short-line-3, img.short-line-4 {
+            width: 100%;
+            height: calc(100vw * 0.101);
+          }
+          }
+        }
+        td.board-center{
+          flex-grow: 1;
+          padding: 0;
+        }
+        td.board-corner{
+          padding: 0;
+          div#jail, div#free,div#new-york, div#go{
+            display: flex;
+            width: 100%;
+            height: calc(100vw * 0.101);
+            img.jail, img.free, img.new-york, img.go{
+              width: 100%;
+              height: calc(100vw * 0.101);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+<template id="osc">
+    <body>
+        <div class="container">
+            <slot name="header"></slot>
+            <slot name="scroll"></slot>
+            <slot name="menu"></slot>
+            <slot name="animation"></slot>
+            <div class="body">
+                <section class="container-off" data-id="0">
+                    <slot name="section-0"></slot>
+                </section>
+            </div>
+            <div class="layer-0">
+                <div
+                    data-id="0"
+                    data-section="0_0"
+                    class="section_0_0 inactive"
+                >
+                    <section class="container" data-id="0">
+                        <slot name="section_0_0"></slot>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <welcome-menu
+            data-id="menu"
+            data-services-path="monopoly"
+            data-css-shadow="monopoly"
+            slot="menu"
+        >
+            <template>
+                <div class="container">
+                    <div class="slider">
+                        <div class="square"></div>
+                    </div>
+                    <div class="body">
+                        <slot name="button-0"></slot>
+                        <slot name="button-1"></slot>
+                        <slot name="button-2"></slot>
+                        <slot name="button-3"></slot>
+                        <slot name="button-4"></slot>
+                        <slot name="button-5"></slot>
+                        <slot name="button-6"></slot>
+                        <slot name="button-7"></slot>
+                        <slot name="button-100"></slot>
+                    </div>
+                </div>
+            </template>
+        </welcome-menu>
+
+        <welcome-section
+            data-services-path="monopoly"
+            data-id="0"
+            data-to="_"
+            data-css-shadow="monopoly"
+            slot="section-0"
+        >
+            <template>
+                <div class="images"></div>
+                <div class="body">
+                    <div class="container">
+                        <div class="slot">
+                            <slot name="section"></slot>
+                        </div>
+                    </div>
+                </div>
+                <manager-board
+                    data-services-path="monopoly"
+                    data-id="0"
+                    data-to="_"
+                    slot="section"
+                    data-css-shadow="monopoly"
+                >
+                    <template>
+                        <section class="board"></section>
+                    </template>
+                </manager-board>
+            </template>
+        </welcome-section>
+    </body>
+</template>

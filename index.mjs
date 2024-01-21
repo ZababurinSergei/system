@@ -159,6 +159,7 @@ export const modules = async (app) => {
     app.use('/dapp', express.static(`${__dirname}/services/dapp/src`));
     app.use('/wallet', express.static(`${__dirname}/services/wallet/src`));
     app.use('/osc', express.static(`${__dirname}/services/osc/src`));
+    app.use('/monopoly', express.static(`${__dirname}/services/monopoly/src`));
     app.use('/mss', express.static(`${__dirname}/services/mss/src`));
     app.use('/welcomebook', express.static(`${__dirname}/services/welcomebook/src`));
     app.use('/mkb', express.static(`${__dirname}/services/mkb/src`));
