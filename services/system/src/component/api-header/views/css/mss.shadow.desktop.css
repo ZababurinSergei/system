@@ -69,6 +69,11 @@ p {
     align-self: center;
 }
 
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
 .subject {
     margin-left: 32px;
     color: var(--Gosblue, #0D4CD3);

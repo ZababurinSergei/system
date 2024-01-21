@@ -1,4 +1,4 @@
-import { className, animationCount, config, events, events_d, store } from '../../../this/index.mjs';
+import { className, animationCount, config, events, store } from '../../../this/index.mjs';
 import { initSections } from '../custom/index.mjs';
 
 export const actions = (self) => {
@@ -18,7 +18,7 @@ export const actions = (self) => {
         let section = {};
 
         section = self.assignedSlot.closest('section');
-        let menuButtons = section.closest('.welcome__book').querySelector('slot[name="welcome-menu"]').assignedElements()[0].querySelectorAll('fer-button');
+        let menuButtons = section.closest('.container').querySelector('slot[name="menu"]').assignedElements()[0].querySelectorAll('fer-button');
         const activeSection = () => {
             for (let i = 0; i < menuButtons.length; ++i) {
                 if (menuButtons[i].classList.contains(className.active)) {

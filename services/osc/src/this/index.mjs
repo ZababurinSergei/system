@@ -12,8 +12,12 @@ export {
     protocols,
     resolvers,
     loader,
-    className
+    className,
+    events,
+    animationCount
 } from './modules/index.mjs'
+
+export { config } from './config/index.mjs'
 export default {
     description: 'all modules for this',
     store: 'https://github.com/jaywcjlove/store.js',
