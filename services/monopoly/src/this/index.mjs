@@ -5,6 +5,7 @@ export { сonfigRouter, router } from './router/index.mjs'
 export {
     toBase64,
     fromBase64,
+    isEmpty,
     camelToSnakeCase,
     normalizePathName,
     Multiaddr,

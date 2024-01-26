@@ -1,4 +1,5 @@
-import isEmpty from '/static/html/components/component_modules/isEmpty/isEmpty.mjs'
+import { isEmpty } from '../../../../../this/index.mjs'
+
 let object = {
     draggingItem: {},
     touchLocation: {},

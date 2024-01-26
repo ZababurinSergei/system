@@ -2,7 +2,9 @@ export const className = {
     active: "active"
 }
 
-export {loader} from './loader/loader.mjs'
+export { isEmpty } from './isEmpty/isEmpty.mjs'
+
+export { loader } from './loader/loader.mjs'
 
 export { toBase64, fromBase64 } from './base64/index.mjs'
 

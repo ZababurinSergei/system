@@ -20,6 +20,10 @@
     height: min-content;
 }
 
+#relation.none {
+    display: none;
+}
+
 #substrate {
     grid-area: b;
 }
@@ -162,7 +166,7 @@ api-main {
     justify-self: center;
     grid-template-rows: 100%;
     grid-template-areas:
-            "a a a b b b b b b b b b";
+            "b b b b b b b b b b b b";
     height: 100%;
     z-index: 8;
 }

@@ -1,4 +1,4 @@
-let config = async (v,p,c,obj,r) => {
+let config = async (obj, type) => {
     if(obj.preset === undefined) {
         let board = await fetch(`/static/html/components/manager-board/template/index/index.json`)
         board = await board.json()
@@ -6,7 +6,7 @@ let config = async (v,p,c,obj,r) => {
     } else {
         if(obj.preset.status) {
             try {
-                let board = await fetch(`/static/html/components/manager-board/template/${obj.preset.name}/${obj.preset.name}.json`)
+                let board = await fetch(`/config/board/template/index.json`)
                 board = await board.json()
                 return board
             } catch (e) {
@@ -16,7 +16,7 @@ let config = async (v,p,c,obj,r) => {
         } else {
             console.warn('не установлен пресет для компонента manager-board (устанавливается <manger-board preset="index"></manger-board>')
             try {
-                let board = await fetch(`/static/html/components/manager-board/template/${obj.preset.name}/${obj.preset.name}.json`)
+                let board = await fetch(`/config/board/template/index.json`)
                 board = await board.json()
                 return board
             } catch (e) {
@@ -27,7 +27,7 @@ let config = async (v,p,c,obj,r) => {
     }
 }
 let count = -1
-function tr(v,p,c,obj,r) {
+function tr(p, obj) {
     let tr = document.createElement('div')
     tr.classList.add('manager-board__item_tr')
     obj.managerBoard.appendChild(tr)
@@ -47,7 +47,7 @@ if(r === 'empty') {
       //  `<div class="manager-board__item_td manager-board__item_td_${p.coord.x}:${p.coord.y}"></div>`)
     }
 */
-function td(v,p,c,obj,r) {
+function td(p, obj, r) {
     let td = document.createElement('div')
     td.classList.add(`${p.coord.y}:${p.coord.x}`);
     td.classList.add('manager-board__item_td');
@@ -57,46 +57,48 @@ function td(v,p,c,obj,r) {
         td.classList.add('manager-board__item_td_empty');
         td.dataset.item = `${p.coord.y}:${p.coord.x}`;
     }
+
     p.tr.appendChild(td)
     return td
 }
 
-function img(v,p,c,obj,r){
+function img(p, obj){
     p.td.insertAdjacentHTML('beforeend',
         `<img class="${p.coord.y}:${p.coord.x} manager-board__item_td_img  ${p.class}_${p.coord.y}:${p.coord.x}" data-item="${p.coord.y}:${p.coord.x}" src="/images/monopoly/board/default/images/${p.class}.png">`)
 }
 
-function output(v,p,c,obj,r) {
+function output(p,obj) {
     if(p.index === 0) {
         count++
-        trTemp = tr(v,p,c,obj,r)
+        trTemp = tr(p,obj)
     }
-    tdTemp = td(v,{
+    tdTemp = td({
         tr: trTemp,
         coord:{
             x: p.index.toString().padStart(2, 0),
             y: count.toString().padStart(2, 0)
         }
-    },c,obj,p.item)
+    },obj, p.item)
     if(p.item !== 'empty') {
-        img(v,{
+        img({
             td: tdTemp,
             class: p.item,
             coord:{
                 x: p.index.toString().padStart(2, 0),
                 y: count.toString().padStart(2, 0)
             }
-        },c,obj,r)
+        }, obj)
     }
 
     console.log('count', count, p.index, p.item)
 }
 
-export default async (v,p,c,obj,r) => {
+export default async (obj,type) => {
     let image = 11
     let state = 0
     let out = 0
-    let board = await config(v,p,c,obj,r)
+    let board = await config(obj, type)
+    console.log('=== board ===', board)
     obj.managerBoard = obj['this']['shadowRoot'].querySelector('.board')
     for(let index=0; index< board.places.length; index++) {
         if(index === image && image !== 40) {
@@ -117,17 +119,17 @@ export default async (v,p,c,obj,r) => {
                 state = 3
             }
         }
-        output(v,{
+        output({
             index:out,
             item: board.places[index]
-        },c,obj,r)
+        }, obj)
         // console.log('out:', out, board.places[index])
         if(state === 1) {
             for(let i =1; i < 10;i++){
-                output(v,{
+                output({
                     index: i,
                     item: 'empty'
-                },c,obj,r)
+                }, obj)
                 // output(v,'empty',c,obj,r)
                 // console.log('out:', i, 'empty')
             }
