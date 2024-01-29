@@ -3,6 +3,8 @@ import postcss from 'gulp-postcss'
 import {pxtoviewport} from './this/index.mjs'
 import autoprefixer from 'autoprefixer'
 import * as dotenv from 'dotenv'
+import rename from "gulp-rename";
+
 dotenv.config()
 
 //1920
@@ -56,9 +58,10 @@ gulp.task('px2vw', function () {
     // _sandbox/graph-viewer/src/modules/Main/components/Comparison/index.module.css
     // let result = gulp.src([`${dir}/**/*.css`])
     // let result = gulp.src([`${dir}/index.module.css`])
-    let result = gulp.src([`${dir}/**/*.${media}.css`])
+    let result = gulp.src([`${dir}/**/*.${media}.px.css`])
         .pipe(postcss(processors))
         .pipe(postcss([ autoprefixer()]))
+        .pipe(rename(`result_px2vw.css`))
         .pipe(gulp.dest(`${dir}`));
 
     // console.timeEnd("⚡ [gulp] Done");
@@ -90,10 +93,11 @@ gulp.task('vw2px', function () {
     ];
 
     // let result = gulp.src([`${dir}/index.module.css`], { sourcemaps: true })
-    let result = gulp.src([`${dir}/**/*.${media}.css`], { sourcemaps: true })
+    let result = gulp.src([`${dir}/**/*.${media}.vw.css`], { sourcemaps: true })
         .pipe(postcss(processors))
         .pipe(postcss([ autoprefixer()]))
-        .pipe(gulp.dest(`${dir}`), { sourcemaps: true });
+        .pipe(rename(`result_vw2px.css`))
+        .pipe(gulp.dest(`${dir}`));
 
     // console.timeEnd("⚡ [gulp] Done");
 

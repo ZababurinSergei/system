@@ -122,9 +122,10 @@ export const pxtoviewport = postcss.plugin('postcss-px-to-viewport', function (o
           size = opts.viewportWidth;
         }
 
-        // var value = '(min(41px, 100vw))'
+
+        // var value = 'min(1.82dvw, 2.59dvh)'
         var value = decl.value.replace(pxRegex, createPxReplace(opts, unit, size));
-        console.log('2222222222222222222222', createPxReplace(opts, unit, size))
+        console.log('Подстановка значения min(1.82dvw, 2.59dvh)', value)
         if (declarationExists(decl.parent, decl.prop, value)) return;
 
         if (opts.replace) {
