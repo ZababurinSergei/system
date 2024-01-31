@@ -74,7 +74,6 @@ export const pxtoviewport = postcss.plugin('postcss-px-to-viewport', function (o
           if (decl.value.indexOf(opts.unitToConvert) === -1) return;
           if (!satisfyPropList(decl.prop)) return;
 
-          console.log('0000000000000000000000000000000', pxRegex, createPxReplace(opts, opts.landscapeUnit, opts.landscapeWidth))
           landscapeRule.append(decl.clone({
             value: decl.value.replace(pxRegex, createPxReplace(opts, opts.landscapeUnit, opts.landscapeWidth))
           }));
@@ -125,7 +124,7 @@ export const pxtoviewport = postcss.plugin('postcss-px-to-viewport', function (o
 
         // var value = 'min(1.82dvw, 2.59dvh)'
         var value = decl.value.replace(pxRegex, createPxReplace(opts, unit, size));
-        console.log('Подстановка значения min(1.82dvw, 2.59dvh)', value)
+        console.log('Подстановка значения min(1.82dvw, 2.59dvh)','value: ', value)
         if (declarationExists(decl.parent, decl.prop, value)) return;
 
         if (opts.replace) {
@@ -156,8 +155,9 @@ function createPxReplace(opts, viewportUnit, viewportSize) {
     if (!$1) return m;
     var pixels = parseFloat($1);
     if (pixels <= opts.minPixelValue) return m;
+    console.log('!!!!!!!! out !!!!!!!!',pixels, viewportSize)
+
     var parsedVal = toFixed((pixels / viewportSize * 100), opts.unitPrecision);
-    console.log('!!!!!!!! out !!!!!!!!',pixels, parsedVal)
     return parsedVal === 0 ? '0' : parsedVal + viewportUnit;
   };
 }
