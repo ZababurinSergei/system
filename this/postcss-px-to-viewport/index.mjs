@@ -25,6 +25,7 @@ var defaults = {
 var ignoreNextComment = 'px-to-viewport-ignore-next';
 var ignorePrevComment = 'px-to-viewport-ignore';
 
+
 export const pxtoviewport = postcss.plugin('postcss-px-to-viewport', function (options) {
   var opts = objectAssign({}, defaults, options);
 
@@ -121,11 +122,24 @@ export const pxtoviewport = postcss.plugin('postcss-px-to-viewport', function (o
           size = opts.viewportWidth;
         }
 
+        let formula = decl.value;
+        let pattern = /(\d+(?:\.\d+)?)vw, (\d+(?:\.\d+)?)rem/;
+        let match = formula.match(pattern);
+        const result = match ? true : false;
 
-        // var value = 'min(1.82dvw, 2.59dvh)'
-        var value = decl.value.replace(pxRegex, createPxReplace(opts, unit, size));
-        console.log('Подстановка значения min(1.82dvw, 2.59dvh)','value: ', value)
-        if (declarationExists(decl.parent, decl.prop, value)) return;
+        let value = ''
+
+        if(result) {
+          const arg1 = match[1];
+          decl.value = `${arg1}vw`
+          value = decl.value.replace(pxRegex, createReplaceMin(opts, unit, size, opts.viewportHeigth));
+        } else {
+          console.log('unit', unit)
+          value = decl.value.replace(pxRegex, opts.isMin
+              ? createPxReplaceRatio(opts, unit, size, opts.viewportHeigth)
+              : createPxReplace(opts, unit, size, opts.viewportHeigth));
+          if (declarationExists(decl.parent, decl.prop, value)) return;
+        }
 
         if (opts.replace) {
           decl.value = value;
@@ -150,13 +164,38 @@ function getUnit(prop, opts) {
   return prop.indexOf('font') === -1 ? opts.viewportUnit : opts.fontViewportUnit;
 }
 
-function createPxReplace(opts, viewportUnit, viewportSize) {
+
+function createReplaceMin(opts, viewportUnit, viewportSize, viewportHeigth) {
   return function (m, $1) {
     if (!$1) return m;
     var pixels = parseFloat($1);
     if (pixels <= opts.minPixelValue) return m;
-    console.log('!!!!!!!! out !!!!!!!!',pixels, viewportSize)
+    var parsedVal = toFixed((pixels / viewportSize * 100), opts.unitPrecision);
+    var parsedValRem = toFixed((pixels / viewportHeigth * 100), opts.unitPrecision);
+    let result1 = parsedVal === 0 ? '0' : parsedVal + viewportUnit
+    let result2 = parsedValRem === 0 ? '0' : parsedValRem + 'rem'
+    return `${result1}`;
+  };
+}
 
+function createPxReplaceRatio(opts, viewportUnit, viewportSize, viewportHeigth) {
+  return function (m, $1) {
+    if (!$1) return m;
+    var pixels = parseFloat($1);
+    if (pixels <= opts.minPixelValue) return m;
+    var parsedVal = toFixed((pixels / viewportSize * 100), opts.unitPrecision);
+    var parsedValRem = toFixed((pixels / viewportHeigth * 100), opts.unitPrecision);
+    let result1 = parsedVal === 0 ? '0' : parsedVal + viewportUnit
+    let result2 = parsedValRem === 0 ? '0' : parsedValRem + 'rem'
+    return `min(${result1}, ${result2})`;
+  };
+}
+
+function createPxReplace(opts, viewportUnit, viewportSize, viewportHeigth) {
+  return function (m, $1) {
+    if (!$1) return m;
+    var pixels = parseFloat($1);
+    if (pixels <= opts.minPixelValue) return m;
     var parsedVal = toFixed((pixels / viewportSize * 100), opts.unitPrecision);
     return parsedVal === 0 ? '0' : parsedVal + viewportUnit;
   };

@@ -1,8 +1,8 @@
 :host {
    display: flex;
    opacity: 0;
-   width: 25.78vw;
-   height: 15.21vw;
+   width: 495px;
+   height: 292px;
    position: absolute;
    left: 0;
    right: 0;
@@ -20,7 +20,7 @@
 :root {
    --neutral-silver: #F5F7FA;
    --neutral-grey: #435F7B;
-   --border-radius: 0.42vw;
+   --border-radius: 8px;
    --primary-m-blue: #0671E0;
    --neutral-white: #FFF;
 }
@@ -66,13 +66,13 @@ button {
 .container {
    display: flex;
    flex-direction: column;
-   gap: 1.25vw;
+   gap: 24px;
    width: 100%;
    height: auto;
-   border-radius: 0.63vw;
+   border-radius: 12px;
    justify-content: center;
    background: var(--White, #FFF);
-   box-shadow: 0px 0.63vw 1.67vw 0px rgba(13, 76, 211, 0.18);
+   box-shadow: 0px 12px 32px 0px rgba(13, 76, 211, 0.18);
 }
 
 .container-content {
@@ -81,14 +81,14 @@ button {
    align-self: center;
    width: 100%;
    height: auto;
-   gap: 1.25vw;
+   gap: 24px;
 }
 
 .container-logo {
    margin: 0;
    padding: 0;
-   width: 2.92vw;
-   height: 2.92vw;
+   width: 56px;
+   height: 56px;
    align-self: center;
 }
 
@@ -103,17 +103,17 @@ button {
 
    /* Plain Text */
    font-family: 'Lato', sans-serif;
-   font-size: 0.83vw;
+   font-size: 16px;
    font-style: normal;
    font-weight: 400;
-   line-height: 1.25vw; /* 150% */
+   line-height: 24px; /* 150% */
 }
 
 .container-login {
-   width: 6.72vw;
-   height: 2.71vw;
+   width: 129px;
+   height: 52px;
 
-   border-radius: 0.42vw;
+   border-radius: 8px;
    background: var(--Gosblue, #0D4CD3);
 
    color: var(--White, #FFF);
@@ -121,17 +121,17 @@ button {
 
    /* Plain Text */
    font-family: 'Lato', sans-serif;
-   font-size: 0.83vw;
+   font-size: 16px;
    font-style: normal;
    font-weight: 400;
-   line-height: 1.25vw; /* 150% */
+   line-height: 24px; /* 150% */
    align-self: center;
    cursor: pointer;
 }
 
 .logo {
-   width: 2.92vw;
-   height: 2.92vw;
+   width: 56px;
+   height: 56px;
 }
 
 .logo img {
