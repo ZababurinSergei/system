@@ -20,7 +20,7 @@
 :root {
    --neutral-silver: #F5F7FA;
    --neutral-grey: #435F7B;
-   --border-radius: 0.42vw;
+   --border-radius: 8px;
    --primary-m-blue: #0671E0;
    --neutral-white: #FFF;
 }
@@ -72,7 +72,7 @@ button {
    border-radius: 12px;
    justify-content: center;
    background: var(--White, #FFF);
-   box-shadow: 0px 12px 32px 0px rgba(13, 76, 211, 0.18);
+   box-shadow: 12px;
 }
 
 .container-content {

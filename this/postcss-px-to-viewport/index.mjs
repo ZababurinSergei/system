@@ -122,6 +122,7 @@ export const pxtoviewport = postcss.plugin('postcss-px-to-viewport', function (o
           size = opts.viewportWidth;
         }
 
+        console.log('@@@@@@@@@@@@@@')
         let formula = decl.value;
         let pattern = /(\d+(?:\.\d+)?)vw, (\d+(?:\.\d+)?)rem/;
         let match = formula.match(pattern);
@@ -132,9 +133,10 @@ export const pxtoviewport = postcss.plugin('postcss-px-to-viewport', function (o
         if(result) {
           const arg1 = match[1];
           decl.value = `${arg1}vw`
+          console.log('ssssssssssssssssssss')
           value = decl.value.replace(pxRegex, createReplaceMin(opts, unit, size, opts.viewportHeigth));
         } else {
-          console.log('unit', unit)
+          console.log('unit ================', opts.isMin)
           value = decl.value.replace(pxRegex, opts.isMin
               ? createPxReplaceRatio(opts, unit, size, opts.viewportHeigth)
               : createPxReplace(opts, unit, size, opts.viewportHeigth));

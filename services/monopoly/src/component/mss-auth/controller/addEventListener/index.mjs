@@ -5,10 +5,10 @@ export default async (self, actions) => {
 
     return {
         init: () => {
-            button.addEventListener('click', actions.click)
+            button?.addEventListener('click', actions.click)
         },
         terminate: () => {
-            button.removeEventListener('click', actions.click)
+            button?.removeEventListener('click', actions.click)
         }
     }
 }

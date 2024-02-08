@@ -102,14 +102,10 @@ gulp.task('min2px', function () {
     ];
 
     // let result = gulp.src([`${dir}/index.module.css`], { sourcemaps: true })
-    let result = gulp.src([`${dir}/**/*.${media}.min.css`], { sourcemaps: true })
+    return gulp.src([`${dir}/**/*.${media}.css`])
         .pipe(postcss(processors))
-        .pipe(postcss([ autoprefixer()]))
+        .pipe(postcss([autoprefixer()]))
         .pipe(gulp.dest(`${dir}`));
-    // .pipe(rename(`result.css`))
-    // console.timeEnd("⚡ [gulp] Done");
-
-    return result
 });
 
 
