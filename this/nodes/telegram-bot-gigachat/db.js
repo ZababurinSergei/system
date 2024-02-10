@@ -1,4 +1,4 @@
-const fs = require('fs/promises');
+import fs from "fs/promises";
 
 class DB {
 
@@ -75,6 +75,8 @@ class DB {
 
 }
 
-module.exports = {
+export const db = new DB()
+
+export default {
     db: new DB()
 }

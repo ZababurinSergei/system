@@ -28,6 +28,8 @@ class Context {
 
 }
 
-module.exports = {
+export {Context}
+
+export default {
     Context: Context
 }

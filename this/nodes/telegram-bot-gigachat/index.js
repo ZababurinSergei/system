@@ -1,7 +1,10 @@
-const TelegramBot = require('node-telegram-bot-api');
-const GigaChat = require('gigachat-node').default;
-require('dotenv').config();
-const { db } = require('./db');
+import TelegramBot from "node-telegram-bot-api";
+import {GigaChat} from "gigachat-node";
+import {config} from "dotenv";
+import {db} from "./db.js";
+
+config();
+
 
 const TG_BOT_KEY = process.env.TG_BOT_KEY;
 const GIGACHAT_CLIENT_SECRET_KEY = process.env.GIGACHAT_CLIENT_SECRET_KEY;
@@ -10,14 +13,25 @@ const bot = new TelegramBot(TG_BOT_KEY, {
     polling: true
 })
 
-const client = new GigaChat(
-    clientSecretKey=GIGACHAT_CLIENT_SECRET_KEY, 
+
+/*
+  clientSecretKey=GIGACHAT_CLIENT_SECRET_KEY,
     isIgnoreTSL=true,
     isPersonal=true,
     true,
     true,
     './image'
+ */
+
+const client = new GigaChat(
+    GIGACHAT_CLIENT_SECRET_KEY,
+    true,
+    true,
+    true,
+    true,
+    './image'
 );
+
 client.createToken();
 
 bot.on('message', async ctx => {
@@ -33,8 +47,8 @@ bot.on('message', async ctx => {
         if(message === '/start') {
             bot.sendMessage(userId, `
                 Lasciate ogne speranza, voi ch’entrate
-       
-                Здравствуйте! Я **ОТС** - ассистент на базе GigaChat. Пока что я понимаю только текстовые сообщения.`, {
+                
+Здравствуйте! Я **ОТС** - ассистент на базе GigaChat. Пока что я понимаю только текстовые сообщения.`, {
                 parse_mode: 'Markdown'
             })
         }
