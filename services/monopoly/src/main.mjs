@@ -112,7 +112,7 @@ export const rules = (mount = {}) => {
             events,
         } = await import(`${pathname}/this/index.mjs`)
 
-        const components = ['manager-board', 'welcome-menu', 'welcome-section']
+        const components = [ 'manager-board', 'welcome-menu', 'welcome-section']
 
         for (let i = 0; i < components.length; ++i) {
             import(`${pathname}/component/${components[i]}/index.mjs`)
