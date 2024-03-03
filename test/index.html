@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div>
+    <div id="header" class="py-12">
+
+        <div class="w-full px-6 md:max-w-4xl md:mx-auto">
+
+
+            <div class="flex pb-3">
+
+                <div class="mr-2">
+                    <a href="../../..">
+                        Home
+                    </a>
+                </div>
+                <span class="mr-2">
+      ▸
+    </span>
+
+                <div class="mr-2">
+                    <a href="../..">
+                        AudioWorklet
+                    </a>
+                </div>
+                <span class="mr-2">
+      ▸
+    </span>
+
+                <div>
+                    Hello Audio Worklet!
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="content">
+        <div class="w-full px-6 md:max-w-4xl md:mx-auto">
+
+
+            <h1>Hello Audio Worklet!</h1>
+            <p>A simple AudioWorkletNode that bypasses the incoming audio stream to its
+                output. The sound source a sine oscillator at 440Hz.</p>
+            <p>See
+                <a href="https://developer.chrome.com/blog/audio-worklet/" target="_blank">
+                    Chrome Developers Article: Enter Audio Worklet</a> for more information.</p>
+
+            <div class="demo-box">
+                <button id="button-start">START</button>
+                <div class="text-sm text-right">
+                    <a href="https://github.com/GoogleChromeLabs/web-audio-samples/tree/main/src/audio-worklet/basic/hello-audio-worklet/"
+                       target="_blank">
+                        source code
+                    </a>
+                </div>
+            </div>
+
+            <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+            <script type="text/javascript" async=""
+                    src="https://www.googletagmanager.com/gtag/js?id=G-D03EXX39RL&amp;l=dataLayer&amp;cx=c"></script>
+
+        </div>
+    </div>
+
+    <div id="footer" class="py-8">
+        <div class="w-full px-6 md:max-w-4xl md:mx-auto">
+            <div class="footer py-6 text-gray-500">
+                <div class="flex pb-3">
+
+                    <div class="mr-1">
+                        <a href="https://googlechromelabs.github.io/web-audio-samples/" target="_blank">Home</a>
+                    </div>
+
+                    <span class="mr-1">
+        ╱
+      </span>
+
+
+                    <div class="mr-1">
+                        <a href="https://github.com/GoogleChromeLabs/web-audio-samples/" target="_blank">Sources</a>
+                    </div>
+
+                    <span class="mr-1">
+        ╱
+      </span>
+
+
+                    <div class="mr-1">
+                        <a href="https://github.com/GoogleChromeLabs/web-audio-samples/issues/new" target="_blank">Report
+                            issues</a>
+                    </div>
+
+                    <span class="mr-1">
+        ╱
+      </span>
+
+
+                    <div class="mr-1">
+                        <a href="https://bugs.chromium.org/p/chromium/issues/entry?components=Blink%3EWebAudio"
+                           target="_blank">Report Chrome issues</a>
+                    </div>
+
+
+                </div>
+                <div class="pb-3">
+                    2010-2023 Chromium authors
+                    (b3b0851)
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    // Copyright (c) 2017 The Chromium Authors. All rights reserved.
+    // Use of this source code is governed by a BSD-style license that can be
+    // found in the LICENSE file.
+
+    const audioContext = new AudioContext();
+
+    const startAudio = async (context) => {
+        await context.audioWorklet.addModule('bypass-processor.js');
+        const oscillator = new OscillatorNode(context);
+        const bypasser = new AudioWorkletNode(context, 'bypass-processor');
+        oscillator.connect(bypasser).connect(context.destination);
+        oscillator.start();
+    };
+
+    // A simplem onLoad handler. It also handles user gesture to unlock the audio
+    // playback.
+    window.addEventListener('load', async () => {
+        const buttonEl = document.getElementById('button-start');
+        buttonEl.disabled = false;
+        buttonEl.addEventListener('click', async () => {
+            await startAudio(audioContext);
+            audioContext.resume();
+            buttonEl.disabled = true;
+            buttonEl.textContent = 'Playing...';
+        }, false);
+    });
+</script>
+
+</body>
+</html>
